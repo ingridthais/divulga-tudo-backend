@@ -29,12 +29,12 @@ public class Anuncio implements Serializable {
 
 	@NotEmpty(message = "O Campo é Obrigatório")
 	@Column(name = "NOME_ANUNCIO", length = 100, nullable = false)
-	@Size(min = 3, max = 100, message = "O tamanho máximo do campo é {field.size}")
+	@Size(min = 3, max = 100, message = "O tamanho minimo do campo é {min} e o máximo é {max}")
 	private String nomeAnuncio;
 
 	@NotEmpty(message = "O Campo é Obrigatório")
 	@Column(name = "NOME_CLIENTE", length = 100, nullable = false)
-	@Size(min = 3, max = 100, message = "O tamanho máximo do campo é {field.size}")
+	@Size(min = 3, max = 100, message = "O tamanho minimo do campo é {min} e o máximo é {max}")
 	private String nomeCliente;
 
 	@NotNull(message = "O Campo é Obrigatório")
@@ -46,7 +46,7 @@ public class Anuncio implements Serializable {
 	private LocalDate dataTermino;
 
 	@NotNull(message = "O Campo é Obrigatório")
-	private Double investimento;
+	private Double investimentoDiario;
 
 	public Long getId() {
 		return id;
@@ -88,12 +88,12 @@ public class Anuncio implements Serializable {
 		this.dataTermino = dataTermino;
 	}
 
-	public Double getInvestimento() {
-		return investimento;
+	public Double getInvestimentoDiario() {
+		return investimentoDiario;
 	}
 
-	public void setInvestimento(Double investimento) {
-		this.investimento = investimento;
+	public void setInvestimentoDiario(Double investimentoDiario) {
+		this.investimentoDiario = investimentoDiario;
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class Anuncio implements Serializable {
 		result = prime * result + ((dataInicio == null) ? 0 : dataInicio.hashCode());
 		result = prime * result + ((dataTermino == null) ? 0 : dataTermino.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((investimento == null) ? 0 : investimento.hashCode());
+		result = prime * result + ((investimentoDiario == null) ? 0 : investimentoDiario.hashCode());
 		result = prime * result + ((nomeAnuncio == null) ? 0 : nomeAnuncio.hashCode());
 		result = prime * result + ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
 		return result;
@@ -133,10 +133,10 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (investimento == null) {
-			if (other.investimento != null)
+		if (investimentoDiario == null) {
+			if (other.investimentoDiario != null)
 				return false;
-		} else if (!investimento.equals(other.investimento))
+		} else if (!investimentoDiario.equals(other.investimentoDiario))
 			return false;
 		if (nomeAnuncio == null) {
 			if (other.nomeAnuncio != null)
