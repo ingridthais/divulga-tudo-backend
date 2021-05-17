@@ -2,6 +2,7 @@ package br.com.divulgatudo.service;
 
 import java.util.List;
 
+import br.com.divulgatudo.dto.AnuncioDTO;
 import br.com.divulgatudo.dto.FiltroAnuncioDTO;
 import br.com.divulgatudo.model.Anuncio;
 
@@ -55,12 +56,12 @@ public interface AnuncioService {
 	public Void delete(Long id);
 	
 	/*
-	 * Pesquisa um Anuncio pelo filtro.
+	 * Pesquisa o Anuncio pelo filtro.
 	 * 
 	 * @param FiltroAnuncioDTO, O filtro dos Anuncios que serão pesquisados.
 	 * 
 	 * @return A lista de Anuncios que foi pesquisada.
 	 * 
 	 */
-	public List<Anuncio> findByFilter(FiltroAnuncioDTO filtro);
+	public List<AnuncioDTO> findByFilter(FiltroAnuncioDTO filtro);
 }

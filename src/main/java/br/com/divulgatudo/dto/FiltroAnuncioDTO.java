@@ -2,16 +2,16 @@ package br.com.divulgatudo.dto;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class FiltroAnuncioDTO {
 
 	private String nomeCliente;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataInicio;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataTermino;
 
 	public String getNomeCliente() {

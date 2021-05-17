@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.divulgatudo.dto.AnuncioDTO;
 import br.com.divulgatudo.dto.FiltroAnuncioDTO;
 import br.com.divulgatudo.model.Anuncio;
 import br.com.divulgatudo.service.impl.AnuncioServiceImpl;
@@ -34,8 +35,8 @@ public class AnuncioResource {
 	}
 
 	@GetMapping("/findByFilter")
-	public ResponseEntity<List<Anuncio>> findByFilter(@ModelAttribute FiltroAnuncioDTO filtro) {
-		return new ResponseEntity<List<Anuncio>>(this.service.findByFilter(filtro), HttpStatus.OK);
+	public ResponseEntity<List<AnuncioDTO>> findByFilter(@ModelAttribute FiltroAnuncioDTO filtro) {
+		return new ResponseEntity<List<AnuncioDTO>>(this.service.findByFilter(filtro), HttpStatus.OK);
 	}
 
 	@PostMapping
