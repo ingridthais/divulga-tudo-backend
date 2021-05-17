@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,40 +22,50 @@ import br.com.divulgatudo.dto.AnuncioDTO;
 import br.com.divulgatudo.dto.FiltroAnuncioDTO;
 import br.com.divulgatudo.model.Anuncio;
 import br.com.divulgatudo.service.impl.AnuncioServiceImpl;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/anuncios")
+@Api(value = "Anuncio")
 public class AnuncioResource {
 
 	@Autowired
 	AnuncioServiceImpl service;
 
-	@GetMapping
+	@ApiOperation(value = "Lista todos os Anuncios")
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Anuncio>> findAll() {
 		return new ResponseEntity<List<Anuncio>>(this.service.findAll(), HttpStatus.OK);
 	}
 
-	@GetMapping("/findByFilter")
+	@ApiOperation(value = "Lista os Anuncios pelo filtro")
+	@GetMapping(value = "/findByFilter", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<AnuncioDTO>> findByFilter(@ModelAttribute FiltroAnuncioDTO filtro) {
 		return new ResponseEntity<List<AnuncioDTO>>(this.service.findByFilter(filtro), HttpStatus.OK);
 	}
 
-	@PostMapping
-	public ResponseEntity<Anuncio> create(@RequestBody @Valid Anuncio anuncio) {
+	@ApiOperation(value = "Cria um Anuncio")
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Anuncio> create(@RequestBody(required = true) @Valid Anuncio anuncio) {
 		return new ResponseEntity<Anuncio>(this.service.create(anuncio), HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Anuncio> update(@RequestBody @Valid Anuncio anuncio, @PathVariable(required = true, name = "id") Long id) {
+	@ApiOperation(value = "Atualiza um Anuncio pelo seu ID")
+	@PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Anuncio> update(@RequestBody(required = true) @Valid Anuncio anuncio,
+			@PathVariable(required = true, name = "id") Long id) {
 		return new ResponseEntity<Anuncio>(this.service.update(anuncio, id), HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@ApiOperation(value = "Consulta o Anuncio pelo seu ID")
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Anuncio> findById(@PathVariable(required = true, name = "id") Long id) {
 		return new ResponseEntity<Anuncio>(this.service.findById(id), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	@ApiOperation(value = "Deleta um Anuncio pelo seu ID")
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable(required = true, name = "id") Long id) {
 		return new ResponseEntity<Void>(this.service.delete(id), HttpStatus.OK);
 	}
